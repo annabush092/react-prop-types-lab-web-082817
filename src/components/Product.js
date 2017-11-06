@@ -20,7 +20,6 @@ Product.defaultProps = {
   hasWatermark: false
 }
 
-
 Product.propTypes = {
   name: PropTypes.string.isRequired,
   producer: PropTypes.string,
@@ -28,11 +27,11 @@ Product.propTypes = {
   color: PropTypes.oneOf(['white', 'eggshell-white', 'salmon']).isRequired,
   weight: function(props, propName, Product) {
     if(props[propName] === null) {
-      return new Error('NO.')
-    } else if(typeof props[propName] !== "number" || isNaN(props[propName])) {
-      return new Error('BOOOO.')
+      return new Error('The prop weight is marked as required')
+    } else if(typeof props[propName] !== "number") {
+      return new Error('Invalid prop weight supplied to Product. Must be a number.')
     } else if(props[propName] < 80 || props[propName] > 300) {
-      return new Error('Invalid prop weight supplied to Product. Validation failed.')
+      return new Error('Invalid prop weight supplied to Product. Must be between 80 and 300.')
     }
   }
 }
